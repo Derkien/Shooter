@@ -9,9 +9,11 @@ namespace Shooter
         public InputController InputController { get; private set; }
         public PlayerController PlayerController { get; private set; }
         public ObjectDetectorController ObjectDetectorController { get; private set; }
+        public WeaponController WeaponController { get; private set; }
+        public Transform Player;
+        public ObjectManager ObjectManager;
 
         private readonly List<IOnUpdate> _updates = new List<IOnUpdate>();
-        private Transform Player;
 
         public static Main Instance { get; private set; }
 
@@ -20,6 +22,8 @@ namespace Shooter
             Instance = this;
 
             Player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            ObjectManager = new ObjectManager();
 
             PlayerController = new PlayerController(new UnitMotor(Player));
             _updates.Add(PlayerController);
@@ -32,12 +36,16 @@ namespace Shooter
 
             ObjectDetectorController = new ObjectDetectorController(Camera.main);
             _updates.Add(ObjectDetectorController);
+
+            WeaponController = new WeaponController();
+            _updates.Add(WeaponController);
         }
 
         private void Start()
         {
-            FlashLightController.Init();
-            ObjectDetectorController.Init();
+            ObjectManager.OnStart();
+            FlashLightController.OnStart();
+            ObjectDetectorController.OnStart();
             InputController.On();
         }
 

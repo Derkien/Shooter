@@ -8,11 +8,12 @@ namespace Shooter
         private FlashLightPowerUi _flashLightPowerUi;
         private FlashLightStateImageUi _flashLightStateImageUi;
 
-        public void Init()
+        public void OnStart()
         {
             _flashLightModel = GameObject.FindObjectOfType<FlashLightModel>();
-            _flashLightPowerUi = GameObject.FindObjectOfType<FlashLightPowerUi>();
-            _flashLightStateImageUi = GameObject.FindObjectOfType<FlashLightStateImageUi>();
+
+            _flashLightPowerUi = UiInterface.FlashLightPowerUi;
+            _flashLightStateImageUi = UiInterface.FlashLightStateImageUi;
         }
 
         public override void On()
