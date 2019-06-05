@@ -15,21 +15,28 @@ namespace Shooter
             _vector = new Vector3(0.5f, 0.5f, 0f);
         }
 
-        public void Init()
+        public void OnStart()
         {
-            _objectAtLineOfSightNameUi = GameObject.FindObjectOfType<ObjectAtLineOfSightNameUi>();
+            _objectAtLineOfSightNameUi = UiInterface.ObjectAtLineOfSightNameUi;
         }
 
         public void OnUpdate()
         {
-            RaycastHit hit;
             Ray ray = _camera.ViewportPointToRay(_vector);
 
-            if (Physics.Raycast(ray, out hit, _maxDistance))
+            if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance))
             {
                 Transform objectHit = hit.transform;
 
-                _objectAtLineOfSightNameUi.FillText = objectHit.name;
+                var _selectedObj = objectHit.GetComponent<ISelectObj>();
+                if (_selectedObj != null)
+                {
+                    _objectAtLineOfSightNameUi.FillText = _selectedObj.GetMessage();
+                }
+                else
+                {
+                    _objectAtLineOfSightNameUi.FillText = objectHit.name;
+                }
             }
             else
             {

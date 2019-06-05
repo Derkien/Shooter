@@ -2,6 +2,6 @@
 {
     public interface IInitialization
     {
-        void Init();
+        void OnStart();
     }
 }
