@@ -2,7 +2,7 @@
 {
     public enum AmmunitionType
     {
-        Rpg = 2,
-        Bullet = 4
+        Bullet = 4,
+        ShotGunBullet = 6
     }
 }
