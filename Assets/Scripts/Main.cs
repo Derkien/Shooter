@@ -10,8 +10,11 @@ namespace Shooter
         public PlayerController PlayerController { get; private set; }
         public ObjectDetectorController ObjectDetectorController { get; private set; }
         public WeaponController WeaponController { get; private set; }
+        public BotController BotController { get; private set; }
         public Transform Player;
+        public Transform SpawnPoint;
         public ObjectManager ObjectManager;
+		public Bot RefBotPrefab;
 
         private readonly List<IOnUpdate> _updates = new List<IOnUpdate>();
 
@@ -39,6 +42,9 @@ namespace Shooter
 
             WeaponController = new WeaponController();
             _updates.Add(WeaponController);
+
+            BotController = new BotController();
+            _updates.Add(BotController);
         }
 
         private void Start()
@@ -47,6 +53,8 @@ namespace Shooter
             FlashLightController.OnStart();
             ObjectDetectorController.OnStart();
             InputController.On();
+            BotController.OnStart();
+            BotController.On();
         }
 
         private void Update()
