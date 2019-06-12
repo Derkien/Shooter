@@ -1,10 +1,12 @@
-﻿namespace Shooter
+﻿using UnityEngine;
+
+namespace Shooter
 {
     public sealed class ShotGunBullet : Ammunition
     {
-        public new AmmunitionType Type = AmmunitionType.ShotGunBullet;
+        public AmmunitionType Type = AmmunitionType.ShotGunBullet;
 
-        private void OnCollisionEnter(UnityEngine.Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             var tempObj = collision.gameObject.GetComponent<ISetDamage>();
 
