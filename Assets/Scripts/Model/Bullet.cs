@@ -1,4 +1,7 @@
-﻿namespace Shooter
+﻿using Shooter.Helper;
+using Shooter.Interface;
+
+namespace Shooter.Model
 {
     public sealed class Bullet : Ammunition
     {

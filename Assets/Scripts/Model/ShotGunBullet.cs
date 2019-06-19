@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using Shooter.Enum;
+using Shooter.Helper;
+using Shooter.Interface;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public sealed class ShotGunBullet : Ammunition
     {

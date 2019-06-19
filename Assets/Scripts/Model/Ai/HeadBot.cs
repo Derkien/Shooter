@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Shooter.Helper;
+using Shooter.Interface;
+using System;
 
-namespace Shooter
+namespace Shooter.Model.Ai
 {
     public class HeadBot : BaseObjectScene, ISetDamage
     {

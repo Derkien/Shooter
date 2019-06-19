@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Shooter
+namespace Shooter.View
 {
     public class UiInterface
     {

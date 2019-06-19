@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Shooter.Model.Ai;
+using System;
 using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Test
 {
     public class DestroyPoint : MonoBehaviour
     {

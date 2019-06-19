@@ -22,3 +22,9 @@ Building 3D shooter step by step
     * added HealthPack prefab;
     * added script for generating objects on map with NavMesh;
     * [solution preview](https://www.dropbox.com/s/eogw27ourq8rp0h/GB-HW-Lesson-5.mp4?dl=0) (35Mb)
+1. Lesson 6:
+    * added improved object generator;
+    * added save/delete/load button;
+    * [solution preview](https://www.dropbox.com/s/l1gncqbsfla24xs/GB-HW-Lesson-6.mp4?dl=0) (38Mb)
+    * [solution preview screen 1](https://www.dropbox.com/s/5ih0o5xsbda1d2a/GB-HW-Lesson-6-1.png?dl=0) (~240kb)
+    * [solution preview screen 2](https://www.dropbox.com/s/kaecrjyxaqbe2sw/GB-HW-Lesson-6-2.png?dl=0) (~240kb)

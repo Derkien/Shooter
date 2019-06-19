@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Shooter.Helper;
+using Shooter.Model.Ai;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Shooter
+namespace Shooter.Test
 {
     public class MovingPoints : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿namespace Shooter
+﻿namespace Shooter.Model
 {
     public struct Clip
     {

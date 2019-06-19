@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Shooter
+namespace Shooter.Helper
 {
-    public static class Extention
+    public static class ExtensionsArray
     {
         public static T[] Concat<T>(this T[] x, T[] y)
         {

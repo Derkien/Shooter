@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public sealed class FlashLightModel : BaseObjectScene
     {
