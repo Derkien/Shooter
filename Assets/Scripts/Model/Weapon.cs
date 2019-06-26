@@ -21,6 +21,8 @@ namespace Shooter.Model
         [SerializeField] protected float _rechargeTime = 0.2f;
         private Queue<Clip> _clips = new Queue<Clip>();
 
+        private ParticleSystem ParticleSystem;
+
         protected bool _isReady = true;
 
         private void Start()
@@ -55,5 +57,10 @@ namespace Shooter.Model
         }
 
         public int CountClip => _clips.Count;
+
+        protected ParticleSystem GetParticleSystem()
+        {
+            return ParticleSystem ? ParticleSystem : ParticleSystem = _barrel.GetComponent<ParticleSystem>();
+        }
     }
 }

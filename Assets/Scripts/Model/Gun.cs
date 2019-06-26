@@ -16,6 +16,13 @@
             {
                 return;
             }
+
+            var particleSystem = GetParticleSystem();
+            if (particleSystem)
+            {
+                particleSystem.Play();
+            }
+
             var temAmmunition = Instantiate(Ammunition, _barrel.position, _barrel.rotation);
             temAmmunition.AddForce(_barrel.forward * _force);
             Clip.CountAmmunition--;
