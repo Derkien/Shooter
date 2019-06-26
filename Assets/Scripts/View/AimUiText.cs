@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Shooter.Model;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shooter
+namespace Shooter.View
 {
     public class AimUiText : MonoBehaviour
     {

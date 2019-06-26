@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model.Ai
 {
     [System.Serializable]
     public class Vision

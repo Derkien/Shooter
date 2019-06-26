@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using Shooter.Enum;
+using Shooter.Interface;
+using Shooter.Model;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Controller
 {
     public class WeaponController : BaseController, IOnUpdate
     {

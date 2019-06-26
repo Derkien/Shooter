@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shooter
+namespace Shooter.View
 {
     public class ObjectAtLineOfSightNameUi : MonoBehaviour
     {

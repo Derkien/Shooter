@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Shooter.Interface;
+using Shooter.Model.Ai;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Controller
 {
     public class BotController : BaseController, IOnUpdate, IInitialization
     {

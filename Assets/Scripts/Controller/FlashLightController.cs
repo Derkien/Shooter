@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using Shooter.Interface;
+using Shooter.Model;
+using Shooter.View;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Controller
 {
     public sealed class FlashLightController : BaseController, IOnUpdate, IInitialization
     {

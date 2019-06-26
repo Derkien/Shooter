@@ -1,4 +1,6 @@
-﻿namespace Shooter
+﻿using Shooter.Helper;
+
+namespace Shooter.Interface
 {
     public interface ISetDamage
     {

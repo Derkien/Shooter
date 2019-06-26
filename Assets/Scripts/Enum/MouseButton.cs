@@ -1,4 +1,4 @@
-﻿namespace Shooter
+﻿namespace Shooter.Enum
 {
     public enum MouseButton : byte
     {

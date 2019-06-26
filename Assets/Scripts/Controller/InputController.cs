@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Shooter.Controller;
+using Shooter.Interface;
+using UnityEngine;
 
 namespace Shooter
 {
@@ -8,6 +10,8 @@ namespace Shooter
         private KeyCode _activeFlashLight = KeyCode.F;
         private KeyCode _cancel = KeyCode.Escape;
         private KeyCode _reloadClip = KeyCode.R;
+        private KeyCode _savePlayer = KeyCode.C;
+        private KeyCode _loadPlayer = KeyCode.V;
         private int _currentWeapon = 0;
 
         public InputController()
@@ -74,6 +78,16 @@ namespace Shooter
             if (Input.GetKeyDown(_reloadClip))
             {
                 Main.Instance.WeaponController.ReloadClip();
+            }
+
+            if (Input.GetKeyDown(_savePlayer))
+            {
+                Main.Instance.SaveDataRepository.Save();
+            }
+
+            if (Input.GetKeyDown(_loadPlayer))
+            {
+                Main.Instance.SaveDataRepository.Load();
             }
         }
 

@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Shooter.Controller;
+using Shooter.Interface;
+using Shooter.Model;
+using Shooter.Model.Ai;
+using Shooter.Repository;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shooter
@@ -11,6 +16,7 @@ namespace Shooter
         public ObjectDetectorController ObjectDetectorController { get; private set; }
         public WeaponController WeaponController { get; private set; }
         public BotController BotController { get; private set; }
+        public SaveDataRepository SaveDataRepository { get; private set; }
         public Transform Player;
         public Transform SpawnPoint;
         public ObjectManager ObjectManager;
@@ -25,6 +31,8 @@ namespace Shooter
             Instance = this;
 
             Player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            SaveDataRepository = new SaveDataRepository();
 
             ObjectManager = new ObjectManager();
 

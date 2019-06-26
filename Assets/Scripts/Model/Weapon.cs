@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Shooter.Enum;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public abstract class Weapon : BaseObjectScene
     {
