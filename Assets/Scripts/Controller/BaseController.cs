@@ -1,4 +1,7 @@
-﻿namespace Shooter
+﻿using Shooter.Model;
+using Shooter.View;
+
+namespace Shooter.Controller
 {
     public abstract class BaseController
     {

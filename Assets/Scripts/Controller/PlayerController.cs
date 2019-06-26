@@ -1,4 +1,6 @@
-﻿namespace Shooter
+﻿using Shooter.Interface;
+
+namespace Shooter.Controller
 {
     public class PlayerController : BaseController, IOnUpdate
     {

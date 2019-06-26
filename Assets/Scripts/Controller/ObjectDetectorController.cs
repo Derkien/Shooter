@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Shooter.Interface;
+using Shooter.View;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Controller
 {
     public class ObjectDetectorController : BaseController, IOnUpdate, IInitialization
     {

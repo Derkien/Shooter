@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Shooter.Interface;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public class HealthPack : BaseObjectScene, ISelectObj
     {

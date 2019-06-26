@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Shooter.Helper;
+using Shooter.Interface;
+using System;
 using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public class Aim : MonoBehaviour, ISetDamage, ISelectObj
     {

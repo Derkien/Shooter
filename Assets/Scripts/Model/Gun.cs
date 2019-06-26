@@ -1,4 +1,4 @@
-﻿namespace Shooter
+﻿namespace Shooter.Model
 {
     public sealed class Gun : Weapon
     {

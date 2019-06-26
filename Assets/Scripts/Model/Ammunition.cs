@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Shooter.Enum;
+using UnityEngine;
 
-namespace Shooter
+namespace Shooter.Model
 {
     public abstract class Ammunition : BaseObjectScene
     {

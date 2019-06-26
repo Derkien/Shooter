@@ -1,4 +1,4 @@
-﻿namespace Shooter
+﻿namespace Shooter.Interface
 {
     public interface IOnUpdate
     {

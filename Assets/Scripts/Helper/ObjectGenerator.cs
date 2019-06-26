@@ -1,64 +1,160 @@
-﻿using System;
+﻿using Shooter.Repository;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = System.Random;
 
-namespace Shooter
+namespace Shooter.Helper
 {
     public class ObjectGenerator : MonoBehaviour
     {
+        private const string parentObjectTag = "OG_Parent";
+
         public GameObject objectToClone;
         public int numberOfObjects = 10;
 
-        private int generatedSeriesNumber = 1;
         private float offset = 0.2f;
         private float step = 2f;
         private float obstacleCheckRadius;
         private Random random = new Random();
+        private bool tagIsCreated;
+
+        private SaveGeneratedDataRepository SaveGeneratedDataRepository = new SaveGeneratedDataRepository();
+
+        #region StorageOperations
+
+        public void SaveGenerated(string gameObjectName)
+        {
+            var gameObject = GameObject.Find(gameObjectName);
+
+            if (!gameObject)
+            {
+                Debug.LogError($"Save Error! Game object with name '{gameObjectName}' not found");
+
+                return;
+            }
+
+            NamedListOfSerializableVector3 saveData = new NamedListOfSerializableVector3(
+                gameObjectName,
+                new List<SerializableVector3>()
+            );
+
+            foreach (Transform child in gameObject.transform)
+            {
+                saveData.List.Add(
+                    new SerializableVector3(
+                        child.transform.position.x,
+                        child.transform.position.y,
+                        child.transform.position.z
+                    )
+                );
+            }
+
+            SaveGeneratedDataRepository.Save(saveData);
+        }
+
+        public void LoadGenerated(string savedFileName)
+        {
+            try
+            {
+                SpawnObjectAtPositionFromLIst(SaveGeneratedDataRepository.Load(savedFileName));
+            }
+            catch (FileNotFoundException)
+            {
+                Debug.LogError($"Load Error! Game object with name '{savedFileName}' not found");
+            }
+        }
+
+        public void DeleteGenerated(string gameObjectName)
+        {
+            var gameObject = GameObject.Find(gameObjectName);
+
+            if (!gameObject)
+            {
+                Debug.LogError($"Delete Error! Game object with name '{gameObjectName}' not found");
+            }
+            else
+            {
+                GameObject.DestroyImmediate(gameObject);
+            }
+        }
+
+        public string[] GetSavedFileNameArray()
+        {
+            return SaveGeneratedDataRepository.GetSavedFileNameArray();
+        }
+
+        public bool IsSavedDataExists()
+        {
+            return SaveGeneratedDataRepository.GetSavedFileNameArray().Length > 0;
+        }
+
+        private void SpawnObjectAtPositionFromLIst(NamedListOfSerializableVector3 list)
+        {
+            GameObject parentGameObject = GreateParentGameObject(PrepareParentObjectName(list.Name));
+
+            foreach (var position in list.List)
+            {
+                Instantiate(
+                  GetObjectToClone(),
+                   position,
+                   Quaternion.identity,
+                   parentGameObject.transform
+                   );
+            }
+        }
+
+        #endregion
+
+        #region CoreLogic
+
+        public GameObject[] FindAllGeneratedObjects()
+        {
+            CreateTagIfNotExists();
+
+            return GameObject.FindGameObjectsWithTag(parentObjectTag);
+        }
 
         public void GenerateObjects()
         {
-            if (!objectToClone)
-            {
-                objectToClone = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            }
+            CreateTagIfNotExists();
 
             GameObject[] Grounds = GameObject.FindGameObjectsWithTag("Ground")
                 .Where(c => c.transform.rotation.x == 0 && c.transform.rotation.y == 0 && c.transform.rotation.z == 0)
                 .ToArray();
 
-            List<Vector3> spawnPositionsList = new List<Vector3>();
+            List<Vector3> spawnPositionList = new List<Vector3>();
             foreach (GameObject ground in Grounds)
             {
-                spawnPositionsList.AddRange(GetSpawnPositionsList(ground));
+                spawnPositionList.AddRange(GetSpawnPositionsList(ground));
             }
 
-            if (spawnPositionsList.Count > 0)
+            if (spawnPositionList.Count > 0)
             {
-                SpawnObject(objectToClone, spawnPositionsList);
+                SpawnObjectAtRandomPositionFromList(spawnPositionList);
             }
         }
 
-        private void SpawnObject(GameObject ground, List<Vector3> spawnPositionsList)
+        private void SpawnObjectAtRandomPositionFromList(List<Vector3> spawnPositionList)
         {
-            var parentGameObject = new GameObject($"OG: {objectToClone.name} ({generatedSeriesNumber})");
+            GameObject parentGameObject = GreateParentGameObject(PrepareParentObjectName());
 
-            var objectsLimit = Math.Min(spawnPositionsList.Count, numberOfObjects);
+            var objectsLimit = Math.Min(spawnPositionList.Count, numberOfObjects);
 
             for (int i = 0; i < objectsLimit; i++)
             {
                 Instantiate(
-                    objectToClone,
-                    spawnPositionsList[random.Next(spawnPositionsList.Count)],
+                    GetObjectToClone(),
+                    spawnPositionList[random.Next(spawnPositionList.Count)],
                     Quaternion.identity,
                     parentGameObject.transform
                     );
             }
-
-            generatedSeriesNumber++;
         }
+
 
         private List<Vector3> GetSpawnPositionsList(GameObject ground)
         {
@@ -78,7 +174,7 @@ namespace Shooter
 
             var initialPositionX = ground.transform.position.x + sizeX / 2 - radius;
             var initialPositionZ = ground.transform.position.z + sizeZ / 2 - radius;
-            var initialPositionY = ground.transform.position.y + sizeY / 2 + objSizeY/2;
+            var initialPositionY = ground.transform.position.y + sizeY / 2 + objSizeY / 2;
 
             var currentPositionX = initialPositionX;
 
@@ -111,5 +207,41 @@ namespace Shooter
 
             return validPositionsList;
         }
+
+        #endregion
+
+        #region Helpers
+
+        private GameObject GreateParentGameObject(string name)
+        {
+            var parentGameObject = new GameObject(name);
+            parentGameObject.tag = parentObjectTag;
+
+            return parentGameObject;
+        }
+
+        private GameObject GetObjectToClone()
+        {
+            return objectToClone ? objectToClone : objectToClone = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        }
+
+        private string PrepareParentObjectName(string name = null)
+        {
+            return name != null ? name : $"OG_{objectToClone.name}_box_{DateTime.Now.ToString("yyyyMMddTHHmmss.fffffff")}";
+        }
+
+        private bool CreateTagIfNotExists()
+        {
+            if (tagIsCreated)
+            {
+                return true;
+            }
+
+            tagIsCreated = TagCreator.CreateTag(parentObjectTag);
+
+            return true;
+        }
+
+        #endregion
     }
 }

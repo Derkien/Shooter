@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace Shooter
+namespace Shooter.Model.Ai
 {
     public static class Patrol
     {

@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using Shooter.Enum;
+using Shooter.Helper;
+using UnityEngine;
 using UnityEngine.AI;
 
-namespace Shooter
+namespace Shooter.Model.Ai
 {
     public sealed class Bot : BaseObjectScene
     {
