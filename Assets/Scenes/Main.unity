@@ -2668,7 +2668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767417871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35, z: 19.67}
+  m_LocalPosition: {x: 14.32, y: 8.63, z: 6.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4800,7 +4800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1642226656}
   SpawnPoint: {fileID: 767417872}
-  RefBotPrefab: {fileID: 2216900214209888779, guid: d40dafc730689da4982bdc34226c0344,
+  RefBotPrefab: {fileID: 6171754182972197777, guid: 789b32c1b8000ee4ebe0412230af2012,
     type: 3}
 --- !u!1 &1692620947
 GameObject:
