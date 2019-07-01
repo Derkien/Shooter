@@ -36,3 +36,7 @@ Building 3D shooter step by step
 	* added particle start on jump animation;
 	* added particle start on fire;
     * [solution preview](https://www.dropbox.com/s/fxf6ruvr6g6ka3o/GB-HW-Lesson-2.2.mp4?dl=0) (~40Mb)
+1. Lesson 2.2:
+    * added ragdoll to enemy (some elements mocked and then removed);
+    * added death effects to enemies based on rigid body and ragdoll;
+    * [solution preview](https://www.dropbox.com/s/rau7mcq7rt73rbk/GB-HW-Lesson-2.3.mp4?dl=0) (~45.5Mb)
