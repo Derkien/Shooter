@@ -98,6 +98,11 @@ namespace Shooter.Model.Ai
                 return;
             }
 
+            if (Agent.enabled == false)
+            {
+                return;
+            }
+
             if (StateBot != StateBot.Detected)
             {
                 if (!Agent.hasPath)
@@ -153,20 +158,30 @@ namespace Shooter.Model.Ai
             {
                 StateBot = StateBot.Died;
                 Agent.enabled = false;
-                foreach (var child in GetComponentsInChildren<Transform>())
-                {
-                    child.parent = null;
-                    var tempRbChild = child.GetComponent<Rigidbody>();
-                    if (!tempRbChild)
-                    {
-                        tempRbChild = child.gameObject.AddComponent<Rigidbody>();
-                    }
-                    //tempRbChild.AddForce(info.Dir * Random.Range(10, 300));
-
-                    Main.Instance.BotController.RemoveBotToList(this);
-                    Destroy(child.gameObject, 10);
-                }
+                Die();
             }
+        }
+
+        private void Die()
+        {
+            foreach (var child in GetComponentsInChildren<Transform>())
+            {
+                child.parent = null;
+                var tempRbChild = child.GetComponent<Rigidbody>();
+                if (!tempRbChild)
+                {
+                    tempRbChild = child.gameObject.AddComponent<Rigidbody>();
+                }
+
+                tempRbChild.isKinematic = false;
+                tempRbChild.useGravity = true;
+
+                Destroy(child.gameObject, 5);
+            }
+            GetComponent<Animator>().enabled = false;
+
+            Main.Instance.BotController.RemoveBotToList(this);
+            Destroy(gameObject, 7);
         }
 
         private void ReadyPatrol()
@@ -176,11 +191,21 @@ namespace Shooter.Model.Ai
 
         private void StopBot()
         {
+            if (Agent.enabled == false)
+            {
+                return;
+            }
+
             Agent.isStopped = true;
         }
 
         public void MovePoint(Vector3 point)
         {
+            if (Agent.enabled == false)
+            {
+                return;
+            }
+
             Agent.SetDestination(point);
         }
     }

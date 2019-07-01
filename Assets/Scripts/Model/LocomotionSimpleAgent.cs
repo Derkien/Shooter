@@ -22,6 +22,11 @@ namespace Shooter.Model
 
         private void Update()
         {
+            if (agent.enabled == false)
+            {
+                return;
+            }
+
             Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
 
             // Map 'worldDeltaPosition' to local space
